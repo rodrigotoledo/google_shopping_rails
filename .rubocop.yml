@@ -1,0 +1,17 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
+Rails:
+  Enabled: true
+RSpec:
+  Enabled: true
+RSpec/MultipleExpectations:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 10000
+Metrics/ClassLength:
+  Max: 10000

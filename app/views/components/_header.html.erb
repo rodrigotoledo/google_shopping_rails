@@ -1,0 +1,42 @@
+<header>
+  <%=link_to image_tag('https://links.papareact.com/208', alt: 'logo', width: 150, height: 150, class: 'object-contain mr-1'), root_path %>
+  <%=form_tag root_path do %>
+    <div class='flex items-center gap-2 w-full px-4 flex-1'>
+      <div class='flex items-center space-x-2 bg-white shadow-xl rounded-full border-none px-6 py-4 md:max-w-5xl flex-1'>
+        <%= heroicon "magnifying-glass", variant: :outline, options: {class: 'h-5 w-5 text-gray-400'} %>
+        <%=text_field_tag :search, '', placeholder: '# of pages', class: 'outline-none placeholder-black block flex-1 border-0' %>
+      </div>
+      <%= button_tag id: 'search_button', type: :button, data: { controller: "button", action: "click->button#handleClick", button_target: "button" }, class: 'bg-blue-500 hover:bg-blue-700 font-bold text-white py-4 px-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed' do %>
+        <%= heroicon "magnifying-glass", variant: :outline, options: {class: 'h-5 w-5 text-white'} %>
+      <% end %>
+
+
+      <div data-controller="search" class='relative'>
+        <input data-search-target="input" data-action="input->search#search" data-url="<%=api_search_url%>" class="border-none outline-none" type="text" placeholder="Search...">
+        <div data-search-target="results" class="absolute left-0 w-full mt-2 origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 hidden"></div>
+      </div>
+
+      <div data-controller="search" class="relative inline-block text-left">
+        <div>
+          <button data-action="click->search#toggleList" type="button" class="inline-flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="options-menu" aria-haspopup="true" aria-expanded="true">
+            Select...
+            <span data-search-target="icon" class="ml-2" data-down-icon='<%= heroicon "chevron-down", variant: :outline, options: {class: "h-5 w-5"} %>' data-up-icon='<%= heroicon "chevron-up", variant: :outline, options: {class: "h-5 w-5"} %>'>
+              <%= heroicon "chevron-down", variant: :outline, options: {class: "h-5 w-5"} %>
+            </span>
+
+          </button>
+        </div>
+        <div data-search-target="list" class="absolute left-0 w-full mt-2 origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" style="display: none;">
+          <div class="py-1">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 border-b border-gray-200" role="menuitem">Default</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 border-b border-gray-200" role="menuitem">By Review</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 border-b border-gray-200" role="menuitem">By Price (lower to high)</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">By Price (high to lower)</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  <% end %>
+</header>
